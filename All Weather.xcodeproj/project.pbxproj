@@ -25,6 +25,9 @@
 		907CB9CE1F766C9300EEA0A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		907CB9D11F766C9300EEA0A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		907CB9D31F766C9300EEA0A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		90934C001F76DD3D00DFD9D9 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ReactiveCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		90934C021F76DD4200DFD9D9 /* ReactiveSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ReactiveSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		90934C041F76DD4600DFD9D9 /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88B52838C578CEB97E2A6E7 /* Pods_All_Weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_All_Weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -52,6 +55,9 @@
 		899D8DEBCC14B610FD1C9978 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				90934C041F76DD4600DFD9D9 /* Result.framework */,
+				90934C021F76DD4200DFD9D9 /* ReactiveSwift.framework */,
+				90934C001F76DD3D00DFD9D9 /* ReactiveCocoa.framework */,
 				E88B52838C578CEB97E2A6E7 /* Pods_All_Weather.framework */,
 			);
 			name = Frameworks;
@@ -101,6 +107,7 @@
 				907CB9C21F766C9300EEA0A9 /* Resources */,
 				EA05F688162E4584325E7CD1 /* [CP] Embed Pods Frameworks */,
 				801FFE802B06765B947B9373 /* [CP] Copy Pods Resources */,
+				90FE2F021F76E82500EA2425 /* SwifLint */,
 			);
 			buildRules = (
 			);
@@ -191,6 +198,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-All Weather/Pods-All Weather-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		90FE2F021F76E82500EA2425 /* SwifLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwifLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\" lint --path \"$PROJECT_DIR/All Weather/\"";
 		};
 		EA05F688162E4584325E7CD1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
