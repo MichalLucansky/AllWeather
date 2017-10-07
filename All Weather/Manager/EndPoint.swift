@@ -1,0 +1,36 @@
+//
+//  EndPoint.swift
+//  All Weather
+//
+//  Created by Michal Lučanský on 7.10.17.
+//  Copyright © 2017 Lucansky.Michal. All rights reserved.
+//
+
+import Alamofire
+
+enum ApiEndPoint {
+    
+     static let baseURL = "api.wunderground.com/api/"
+     static let apiKey = "3f886feda3e980c2"
+     static let format = ".json"
+    
+    case actualWeather
+    case weatherForcastForThreeDays
+    case weatherForcastFotTenDays
+  
+    var forecastType: String {
+        switch self {
+        case .actualWeather:
+            return "/conditions/q/"
+        case .weatherForcastForThreeDays:
+            return "/forecast/q/"
+        case .weatherForcastFotTenDays:
+            return "/forecast10day/q/"
+            
+        }
+    }
+    
+    func myURL(location: String) -> String {
+        return ApiEndPoint.baseURL + ApiEndPoint.apiKey + forecastType + location + ApiEndPoint.format
+    }
+}
