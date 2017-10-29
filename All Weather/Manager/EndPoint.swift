@@ -10,27 +10,30 @@ import Alamofire
 
 enum ApiEndPoint {
     
-     static let baseURL = "api.wunderground.com/api/"
-     static let apiKey = "3f886feda3e980c2"
-     static let format = ".json"
+    static let baseURL = "http://api.wunderground.com/api/"
+    static let apiKey = "3f886feda3e980c2"
+    static let format = ".json"
     
     case actualWeather
     case weatherForcastForThreeDays
     case weatherForcastFotTenDays
+    case hourlyWeatherForecast
   
     var forecastType: String {
         switch self {
         case .actualWeather:
-            return "/conditions/q/"
+            return "/forecast/conditions/lang:SK/q/"
         case .weatherForcastForThreeDays:
-            return "/forecast/q/"
+            return "/forecast/lang:SK/q/"
         case .weatherForcastFotTenDays:
-            return "/forecast10day/q/"
+            return "/forecast10day/lang:SK/q/"
+        case .hourlyWeatherForecast:
+            return "/hourly/lang:SK/q/"
             
         }
     }
     
-    func myURL(location: String) -> String {
+    func forecastURL(location: String) -> String {
         return ApiEndPoint.baseURL + ApiEndPoint.apiKey + forecastType + location + ApiEndPoint.format
     }
 }
