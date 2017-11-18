@@ -28,7 +28,7 @@ class NetworkRequests {
     
     static func hourlyForecast(endPoint: ApiEndPoint, location: String, completion: @escaping (HourlyForeast?, Error? ) -> Void) {
          guard let url = URL(string: endPoint.forecastURL(location: location)) else {return}
-        print("------------------>\(url)")
+        print("------------------>hodinova predpoed\(url)")
         Alamofire.request(url).responseObject { (response: DataResponse<HourlyForeast>) in
             if let error = response.result.error {
                 completion(nil, error)

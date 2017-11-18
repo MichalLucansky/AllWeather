@@ -12,12 +12,7 @@ import CoreLocation
 
 class MainWeatherViewModel {
     
-    var userPosition: String? {
-        didSet {
-            getForecast()
-        }
-    }
-    
+    var userPosition: String?
     var currentDate = MutableProperty<String?>(nil)
     var currentWeather = MutableProperty<CurrentWeather?>(nil)
     var hourlyForecasts: HourlyForeast?

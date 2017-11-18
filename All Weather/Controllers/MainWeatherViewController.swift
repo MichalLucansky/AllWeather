@@ -30,8 +30,6 @@ class MainWeatherViewController: UIViewController, CLLocationManagerDelegate {
         bindModel()
         viewModel.getCurrentDate()
         locationHendler()
-        viewModel.getForecast()
-        viewModel.getHourlyForecasts()
         tabBarController?.tabBar.backgroundImage = UIImage()
         tabBarController?.tabBar.shadowImage = UIImage()
         hourForecast.delegate = self
@@ -91,7 +89,6 @@ class MainWeatherViewController: UIViewController, CLLocationManagerDelegate {
             }
         }
         viewModel.userPosition = "\(lat),\(long)"
-        viewModel.getForecast()
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationPicker()
