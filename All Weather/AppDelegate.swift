@@ -23,7 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let viewControllers = tabBarController.viewControllers {
             for viewController in viewControllers {
                 if let fetchViewController = viewController as? MainWeatherViewController {
-                    fetchViewController.bindModel()
+                    fetchViewController.locationHendler()
+                    fetchViewController.viewModel.getForecast()
+                    fetchViewController.viewModel.getHourlyForecasts()
                 }
             }
         }

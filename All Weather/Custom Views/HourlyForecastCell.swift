@@ -15,12 +15,11 @@ class HourlyForecastCell: UICollectionViewCell {
     @IBOutlet weak var hoursLabel: UILabel!
     @IBOutlet weak var weatherImage: UIImageView!
     
-    func setUpUi(temp: String, hours: String, weatherIconURL: String) {
-        guard let iconURL = URL(string: weatherIconURL) else { return }
+    func setUpUi(temp: String, hours: String, weatherIconURL: UIImage) {
         
         self.tempLabel.text = "\(temp)" + "°"
         self.hoursLabel.text = "\(hours)" + ":00"
-        self.weatherImage.af_setImage(withURL: iconURL)
+        self.weatherImage.image = weatherIconURL
     }
     
 }

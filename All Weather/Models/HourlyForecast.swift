@@ -30,6 +30,6 @@ class HourlyForecast: Mappable {
     func mapping(map: Map) {
         hour <- map["FCTTIME.hour"]
         temp <- map["temp.metric"]
-        weatherTypeIcon <- map["icon_url"]
+        weatherTypeIcon <- map["icon"]
     }
 }

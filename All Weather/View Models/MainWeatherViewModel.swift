@@ -17,11 +17,34 @@ class MainWeatherViewModel {
             getForecast()
         }
     }
+    
     var currentDate = MutableProperty<String?>(nil)
     var currentWeather = MutableProperty<CurrentWeather?>(nil)
     var hourlyForecasts: HourlyForeast?
     var status = MutableProperty<Bool>(false)
     var error = MutableProperty<String?>(nil)
+    
+    func setCurrentWeatherType(weather: String?) -> UIImage {
+        guard let weather = weather else {return UIImage()}
+        
+        switch weather {
+        case "clear":
+            return #imageLiteral(resourceName: "sunny")
+        case "mostlycloudy", "cloudy":
+            return #imageLiteral(resourceName: "cloudy")
+        case "mostlysunny", "partlycloudy", "partlysunny":
+            return #imageLiteral(resourceName: "mostlycloudy")
+        case "rain", "chancerain":
+            return #imageLiteral(resourceName: "rain")
+        case "snow":
+            return #imageLiteral(resourceName: "snow")
+        case "tstorms", "chancetstorms":
+            return #imageLiteral(resourceName: "tstorms")
+        default:
+            break
+        }
+        return UIImage()
+    }
     
     func getCurrentDate() {   
         let date = Date()
