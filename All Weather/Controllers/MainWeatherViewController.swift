@@ -48,7 +48,6 @@ class MainWeatherViewController: UIViewController, CLLocationManagerDelegate {
             self?.dateLabel.text = date
         }
         viewModel.currentWeather.producer.startWithValues({ [weak self](weather) in
-            self?.cityNameLabel.text = weather?.nameLocation
             guard let temp = weather?.currentTemp, let minTemp = weather?.minTemp, var maxTemp = weather?.maxTemp, let icon = weather?.icon, let elevation = weather?.elevation
                 else { return }
             if temp > Double(maxTemp)! {
