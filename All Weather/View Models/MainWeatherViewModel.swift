@@ -23,6 +23,7 @@ class MainWeatherViewModel {
     var status = MutableProperty<Bool>(false)
     var error = MutableProperty<String?>(nil)
     
+    
     func getCurrentDate() {   
         let date = Date()
         let dateFormatter = DateFormatter()

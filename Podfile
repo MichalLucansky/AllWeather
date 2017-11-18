@@ -8,7 +8,8 @@ target 'All Weather' do
   pod 'AlamofireImage', '~> 3.3.0'
   pod 'ReactiveSwift', '~> 2.0.0'
   pod 'ReactiveCocoa', '~> 6.0.0'
-  pod 'ObjectMapper', '~> 3.0.0' 
+  pod 'ObjectMapper', '~> 3.0.0'
+  pod 'AlamofireObjectMapper', '~> 5.0'
   pod 'SwiftLint'
 
 

@@ -19,7 +19,8 @@ class MainWeatherViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var actualTempLabel: UILabel!
     @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var hourForecast: UICollectionView!
-     var viewModel: MainWeatherViewModel!
+    
+    var viewModel: MainWeatherViewModel!
     var manager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -27,7 +28,7 @@ class MainWeatherViewController: UIViewController, CLLocationManagerDelegate {
         viewModel = MainWeatherViewModel()
         bindModel()
         viewModel.getCurrentDate()
-        
+     
         locationHendler()
         viewModel.getForecast()
         viewModel.getHourlyForecasts()
@@ -47,7 +48,6 @@ class MainWeatherViewController: UIViewController, CLLocationManagerDelegate {
             self?.dateLabel.text = date
         }
         viewModel.currentWeather.producer.startWithValues({ [weak self](weather) in
-            self?.cityNameLabel.text = weather?.nameLocation
             guard let temp = weather?.currentTemp, let minTemp = weather?.minTemp, var maxTemp = weather?.maxTemp else { return }
             if temp > Double(maxTemp)! {
                 maxTemp = "\(Int(temp))"
@@ -74,12 +74,25 @@ class MainWeatherViewController: UIViewController, CLLocationManagerDelegate {
     func locationPicker() {
         guard let lat = manager.location?.coordinate.latitude, let long = manager.location?.coordinate.longitude
             else {return}
+        let geoCoder = CLGeocoder()
+        let currentlocation = CLLocation(latitude: lat, longitude: long)
+        geoCoder.reverseGeocodeLocation(currentlocation) { [weak self](placemark, error) in
+            if error != nil {
+            }
+            let actualPlace = placemark
+            
+            if (actualPlace?.count)! > 0 {
+                let pm = actualPlace?[0]
+                guard let city = pm?.locality else { return }
+                self?.cityNameLabel.text = city
+            }
+        }
         viewModel.userPosition = "\(lat),\(long)"
-        print("\(lat),\(long)")
         viewModel.getForecast()
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationPicker()
+
     }
     
 }
@@ -91,7 +104,9 @@ extension MainWeatherViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = hourForecast.dequeueReusableCell(withReuseIdentifier: "hourForecast", for: indexPath) as? HourlyForecastCell
-        guard let temp = viewModel.hourlyForecasts?.hourlyForecasts![indexPath.row].temp, let hour = viewModel.hourlyForecasts?.hourlyForecasts![indexPath.row].hour, let iconURL = viewModel.hourlyForecasts?.hourlyForecasts![indexPath.row].weatherTypeIcon  else {
+        guard let temp = viewModel.hourlyForecasts?.hourlyForecasts![indexPath.row].temp,
+            let hour = viewModel.hourlyForecasts?.hourlyForecasts![indexPath.row].hour,
+            let iconURL = viewModel.hourlyForecasts?.hourlyForecasts![indexPath.row].weatherTypeIcon  else {
             return cell!
         }
         cell?.setUpUi(temp: temp, hours: hour, weatherIconURL: iconURL)
