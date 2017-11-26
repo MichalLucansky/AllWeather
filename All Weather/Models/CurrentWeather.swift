@@ -20,6 +20,7 @@ class CurrentWeather: Mappable {
     var maxTemp: String?
     var icon: String?
     var elevation: String?
+    var pressure: String?
     
     func mapping(map: Map) {
         
@@ -30,6 +31,7 @@ class CurrentWeather: Mappable {
         maxTemp <- map["forecast.simpleforecast.forecastday.0.high.celsius"]
         icon <- map["current_observation.icon"]
         elevation <- map["current_observation.display_location.elevation"]
+        pressure <- map["current_observation.pressure_mb"]
     }
 
 }

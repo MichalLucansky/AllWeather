@@ -13,6 +13,7 @@ import ReactiveCocoa
 
 class MainWeatherViewController: UIViewController, CLLocationManagerDelegate {
     
+    @IBOutlet weak var pressureLabel: UILabel!
     @IBOutlet weak var elevationLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var minTempLabel: UILabel!
@@ -21,6 +22,7 @@ class MainWeatherViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var hourForecast: UICollectionView!
     @IBOutlet weak var actualWeatherIcon: UIImageView!
+    
     var viewModel: MainWeatherViewModel!
     var manager = CLLocationManager()
     
@@ -46,7 +48,7 @@ class MainWeatherViewController: UIViewController, CLLocationManagerDelegate {
             self?.dateLabel.text = date
         }
         viewModel.currentWeather.producer.startWithValues({ [weak self](weather) in
-            guard let temp = weather?.currentTemp, let minTemp = weather?.minTemp, var maxTemp = weather?.maxTemp, let icon = weather?.icon, let elevation = weather?.elevation
+            guard let temp = weather?.currentTemp, let minTemp = weather?.minTemp, var maxTemp = weather?.maxTemp, let icon = weather?.icon, let elevation = weather?.elevation, let pressure = weather?.pressure
                 else { return }
             if temp > Double(maxTemp)! {
                 maxTemp = "\(Int(temp))"
@@ -56,6 +58,8 @@ class MainWeatherViewController: UIViewController, CLLocationManagerDelegate {
             self?.minTempLabel.text = minTemp + "°"
             self?.actualWeatherIcon.image = self?.viewModel.setCurrentWeatherType(weather: icon)
             self?.elevationLabel.text = elevation
+            self?.pressureLabel.text = "\(pressure) hPa"
+            
         })
         viewModel.error.producer.startWithValues({ [weak self] (error) in
             print(error)
@@ -99,7 +103,7 @@ class MainWeatherViewController: UIViewController, CLLocationManagerDelegate {
 
 extension MainWeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 24 //viewModel.hourlyForecasts?.hourlyForecasts?.count ?? 0
+        return 9 //viewModel.hourlyForecasts?.hourlyForecasts?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -23,6 +23,8 @@ class MainWeatherViewModel {
         guard let weather = weather else {return UIImage()}
         
         switch weather {
+        case "sleet":
+            return #imageLiteral(resourceName: "sleet")
         case "clear":
             return #imageLiteral(resourceName: "sunny")
         case "mostlycloudy", "cloudy":
